@@ -8,5 +8,6 @@ int main()
     cout << "Zmiana w main" << endl;
     cout << "Antek dokonal zmiany. Pozdrawiam." << endl;
     cout << "Antoni, starczy na dziś, umiemy w gita" << endl;
+    cout << "tak Mikolaju, mozemy." << endl;
     return 0;
 }
