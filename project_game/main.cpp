@@ -15,6 +15,13 @@ int main()
     sf::RenderWindow window(sf::VideoMode(window_x, window_y), "SPIKY BIRD");
     window.setFramerateLimit(60);
 
+    sf::Texture texture_background;
+    if(!texture_background.loadFromFile("background.png")) { return 1; }
+    texture_background.setRepeated(true);
+
+    sf::Sprite background;
+    background.setTexture(texture_background);
+
 
     while (window.isOpen()) {
         sf::Event event;
@@ -23,6 +30,7 @@ int main()
                 window.close();
         }
 
+        window.draw(background);
 
         window.display();
     }
