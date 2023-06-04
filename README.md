@@ -1,4 +1,5 @@
 # project_game
 Project - studies
 
-Testing...
+We are creating game 'Spiky bird'!
+COMING SOON...
