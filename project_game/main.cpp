@@ -26,7 +26,7 @@ int main()
 
     sf::Sprite bird;
     bird.setTexture(texture_bird);
-    bird.setPosition(50, 50);
+    bird.setPosition(310, 380);
 
     float birdSpeed = 3.0f;
 
