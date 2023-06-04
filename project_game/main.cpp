@@ -12,7 +12,7 @@ int main()
 {
     float window_x = 650.0;
     float window_y = 800.0;
-    sf::RenderWindow window(sf::VideoMode(window_x, window_y), "Spiky Birdy");
+    sf::RenderWindow window(sf::VideoMode(window_x, window_y), "Spiky Bird");
     window.setFramerateLimit(60);
 
     sf::Texture texture_background;
