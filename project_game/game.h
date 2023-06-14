@@ -14,7 +14,8 @@ enum AssetID
     LEFT_WALL,
     RIGHT_WALL,
     CANDY,
-    BIRD
+    BIRDGAME,
+    BIRDMENU
 };
 
 struct Context

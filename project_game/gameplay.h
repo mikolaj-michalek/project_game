@@ -3,6 +3,7 @@
 
 #include "State.h"
 #include "game.h"
+#include "bird.h"
 #include <memory>
 #include <SFML/Graphics/Sprite.hpp>
 
@@ -15,7 +16,10 @@ private:
     sf::Sprite m_leftWall;
     sf::Sprite m_rightWall;
 
-    //animated sprites
+    Bird m_bird;
+    sf::Time m_elapsedTime;
+    sf::Clock timer;
+
 
 public:
     GamePlay(std::shared_ptr<Context> &context);
