@@ -7,6 +7,7 @@ INCLUDEPATH += "C:\SFML\SFML-2.5.1\include"
 
 SOURCES += \
         assetmanager.cpp \
+        game.cpp \
         main.cpp \
         statemanager.cpp
 
@@ -20,4 +21,5 @@ CONFIG(debug, debug|release){
 HEADERS += \
     State.h \
     assetmanager.h \
+    game.h \
     statemanager.h
