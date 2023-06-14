@@ -9,6 +9,7 @@ SOURCES += \
         assetmanager.cpp \
         game.cpp \
         main.cpp \
+        mainmenu.cpp \
         statemanager.cpp
 
 LIBS += -L"C:\SFML\SFML-2.5.1\lib"
@@ -22,4 +23,5 @@ HEADERS += \
     State.h \
     assetmanager.h \
     game.h \
+    mainmenu.h \
     statemanager.h

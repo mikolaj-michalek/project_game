@@ -7,6 +7,11 @@
 #include "assetmanager.h"
 #include "statemanager.h"
 
+enum AssetID
+{
+    MAIN_FONT = 0
+};
+
 struct Context
 {
     std::unique_ptr<Engine::AssetManager> m_assets;
