@@ -7,6 +7,7 @@ INCLUDEPATH += "C:\SFML\SFML-2.5.1\include"
 
 SOURCES += \
         assetmanager.cpp \
+        bird.cpp \
         game.cpp \
         gameplay.cpp \
         main.cpp \
@@ -23,6 +24,7 @@ CONFIG(debug, debug|release){
 HEADERS += \
     State.h \
     assetmanager.h \
+    bird.h \
     game.h \
     gameplay.h \
     mainmenu.h \
