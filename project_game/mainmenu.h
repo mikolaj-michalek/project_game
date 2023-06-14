@@ -5,6 +5,7 @@
 #include <vector>
 
 #include <SFML/Graphics/Text.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 
 #include "State.h"
 #include "game.h"
@@ -17,6 +18,7 @@ private:
     sf::Text m_gameInstruction_1;
     sf::Text m_gameInstruction_2;
     sf::Text m_gameInstruction_3;
+    sf::Sprite m_menuBackground;
     bool isSpaceButtonPressed;
     bool isEscapeButtonPressed;
 
