@@ -21,9 +21,9 @@ void Bird::add_animation_frame(const sf::IntRect &frame)
 void Bird::step(const sf::Time elapsed)
 {
     elapsed_accumulator += elapsed.asSeconds();
-    while (elapsed_accumulator >= 1.0/fps)
+    while (elapsed_accumulator >= 1.75/fps)
     {
-        elapsed_accumulator -= 1.0/fps;
+        elapsed_accumulator -= 1.75/fps;
         if (!frames.empty())
         {
             setTextureRect(*current_frame);
@@ -49,7 +49,7 @@ void Bird::InitGamePlay(const sf::Texture& texture)
 void Bird::InitMainMenu(const sf::Texture& texture)
 {
     setTexture(texture);                                                                    //inicjalizacja tekstury
-    setTextureRect(sf::IntRect(0, 0, 80, 75));                                             //wyciêcie poczatkowej tekstury
+    setTextureRect(sf::IntRect(0, 0, 84, 75));                                             //wyciêcie poczatkowej tekstury
     setPosition(325, 400);
     setOrigin(this->getLocalBounds().width / 2, this->getLocalBounds().height / 2);
 }

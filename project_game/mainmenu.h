@@ -3,12 +3,13 @@
 
 #include <memory>
 #include <vector>
-
+#include "bird.h"
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
 #include "State.h"
 #include "game.h"
+
 
 class MainMenu : public Engine::State
 {
@@ -21,6 +22,9 @@ private:
     sf::Sprite m_menuBackground;
     bool isSpaceButtonPressed;
     bool isEscapeButtonPressed;
+
+    Bird menu_bird;
+    sf::Time m_elapsedTime;
 
 public:
     MainMenu(std::shared_ptr<Context> &context);
