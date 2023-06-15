@@ -25,20 +25,23 @@ Fonts:
 1) https://fonts.google.com
    - pixel_font_7 (SIL Open Font License)
 Textures:
-2) https://pl.freepik.com
+1) https://pl.freepik.com
    - bird_gameplay.png (Freepik License)
    - bird_waiting.png (Freepik License)
-3) https://itch.io
+2) https://itch.io
    - kolec.png (MIT License, author: 1juancarlos, link: https://1juancarlos.itch.io/simple-2d-pixel-art-wooden-spikes)
    - kolec_lewy.png (own authorship, using kolec.png)
    - kolec_prawy.png (own authorship, using kolec.png)
    - background.png (MIT License, author: illuma-animations, link: https://illuma-animations.itch.io/jumping-giro)
    - background_2.png -> background_6.png (own authorship, using background.png)
    - background_gameover (own authorship, using background.png)
-4) Own authorship
+3) Own authorship
    - coin.png
    - lewa_sciana.png
    - prawa_sciana.png
+AssetManager & StateManager:
+1) https://www.youtube.com/playlist?list=PLiZZKL9HLmWMF8PlzvZu2WOC9kjs1zzhm
+2) https://www.youtube.com/watch?v=BySDfVNljG8&list=PL6xSOsbVA1eb_QqMTTcql_3PdOiE928up
 
 ## Technologies
 - C++
