@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "game.h"
 #include <vector>
+#include <random>
 
 class Coin : public sf::Sprite
 {
@@ -26,6 +27,7 @@ public:
     void hide_coin();
     bool is_collect;
     bool is_show;
+    int random_position();
 };
 
 #endif // COIN_H

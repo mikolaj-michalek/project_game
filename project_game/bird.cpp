@@ -74,8 +74,63 @@ void Bird::setRotation(float v_r)
 }
 void Bird::animation(const sf::Time elapsed, sf::Clock& realtimer)
 {
+    switch(this->currentLevel)
+    {
+    case 1:
+        this->g_force *= 1;
+        this->setScale(getScale().x, 1);
+        break;
+    case 2:
+        if(this->g_force>0)
+        {
+           this->g_force *= -1;
+        }
+        this->setScale(getScale().x, -1);
+        break;
+    case 3:
+        if(this->g_force<0)
+        {
+           this->g_force *= -1;
+        }
+        this->setScale(getScale().x, 1);
+        break;
+    case 4:
+        if(this->g_force>0)
+        {
+           this->g_force *= -1;
+        }
+        this->setScale(getScale().x, -1);
+        break;
+    case 5:
+        if(this->g_force<0)
+        {
+           this->g_force *= -1;
+        }
+        this->setScale(getScale().x, 1);
+        break;
+    case 6:
+        if(this->g_force>0)
+        {
+           this->g_force *= -1;
+        }
+        this->setScale(getScale().x, -1);
+        break;
+    case 7:
+        if(this->g_force<0)
+        {
+           this->g_force *= -1;
+        }
+        this->setScale(getScale().x, 1);
+        break;
+    default:
+        this->g_force *= 1;
+        this->setScale(getScale().x, 1);
+        break;
+    }
     if(!isDead)
     {
+
+
         static bool isSpacePressed = false;
         static bool isTextureChanged = false;
         static sf::Time textureChangeDuration = sf::seconds(0.2f); // Czas trwania zmiany tekstury (0.1 sekundy w przykładzie)
@@ -83,7 +138,14 @@ void Bird::animation(const sf::Time elapsed, sf::Clock& realtimer)
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !isSpacePressed)
         {
             isSpacePressed = true;
-            vel_y = -290;
+            if((currentLevel%2) == 1)
+            {
+                vel_y = -290;
+            }
+            if((currentLevel%2) == 0)
+            {
+                vel_y = 290;
+            }
             if (!isTextureChanged)
             {
                 change_look_space();
@@ -128,37 +190,79 @@ void Bird::collision(float win_x, float win_y)
     {
         toRight();
     }
-    if(bird_bounds.top <= 61)
+    if((currentLevel%2) == 1)
     {
-        change_look_die();
-        if(g_force < 5000)
+        if(bird_bounds.top <= 61)
         {
-           g_force *= 1.09;
-           setVelocity(vel_x,-150);
+            change_look_die();
+            if(g_force < 5000)
+            {
+                g_force *= 1.09;
+                setVelocity(vel_x,-150);
+            }
+            else
+            {
+                setStartPosition();
+                setTextureRect(sf::IntRect(0, 0, 1, 1));
+                TimeToEnd = true;
+            }
+            this->vel_y = -(vel_y);
         }
-        else
+        if((bird_bounds.top+bird_bounds.height) >= (win_y-59))
         {
-            setStartPosition();
-            setTextureRect(sf::IntRect(0, 0, 1, 1));
-            TimeToEnd = true;
+            change_look_die();
+            if(g_force < 5000)
+            {
+                g_force *= 1.09;
+                setVelocity(vel_x,150);
+            }
+            else
+            {
+                setStartPosition();
+                setTextureRect(sf::IntRect(0, 0, 1, 1));
+                TimeToEnd = true;
+            }
+            this->vel_y = -(vel_y);
         }
-        this->vel_y = -(vel_y);
     }
-    if((bird_bounds.top+bird_bounds.height) >= (win_y-59))
-    { 
-        change_look_die();
-        if(g_force < 5000)
+    if((currentLevel%2) == 0)
+    {
+        bird_bounds = getGlobalBounds();
+
+        if(bird_bounds.top <= 61)
         {
-           g_force *= 1.09;
-           setVelocity(vel_x,150);
+            change_look_die();
+            this->g_force *= -1;
+            if(g_force < 2000)
+            {
+                g_force *= 1.09;
+                setVelocity(vel_x, -150);
+            }
+            else
+            {
+                setStartPosition();
+                setTextureRect(sf::IntRect(0, 0, 1, 1));
+                TimeToEnd = true;
+            }
+            this->vel_y = -(vel_y);
         }
-        else
+        if((bird_bounds.top+bird_bounds.height) >= (win_y-59))
         {
-            setStartPosition();
-            setTextureRect(sf::IntRect(0, 0, 1, 1));
-            TimeToEnd = true;
+            change_look_die();
+            this->g_force *= -1;
+            if(g_force < 2000)
+            {
+                g_force *= 1.09;
+                setVelocity(vel_x, 150);
+            }
+            else
+            {
+                setStartPosition();
+                setTextureRect(sf::IntRect(0, 0, 1, 1));
+                TimeToEnd = true;
+            }
+            this->vel_y = -(vel_y);
         }
-        this->vel_y = -(vel_y);
     }
 }
 
@@ -177,7 +281,7 @@ std::vector<int> Bird::losowanie(std::vector<int> numb, int m_amount)
 void Bird::toLeft()
 {
     vel_x = -(vel_x);
-    setScale(-1,1);
+    setScale(-1,getScale().y);
     hitRight = true;
     hitLeft = false;
     losowanie(numbers, 1);
@@ -191,7 +295,7 @@ void Bird::toLeft()
 void Bird::toRight()
 {
     vel_x = -(vel_x);
-    setScale(1,1);
+    setScale(1,getScale().y);
     hitRight = false;
     hitLeft = true;
     losowanie(numbers, 1);

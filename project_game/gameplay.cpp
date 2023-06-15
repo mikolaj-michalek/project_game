@@ -49,11 +49,15 @@ void GamePlay::Init()
 
     m_bird.InitGamePlay(m_context->m_assets->GetTexture(BIRDGAME));
 
-    left_coin.Init(m_context->m_assets->GetTexture(COIN), 150, 400);
+    left_coin.Init(m_context->m_assets->GetTexture(COIN), 120, 400);
+    right_coin.Init(m_context->m_assets->GetTexture(COIN), 530, 600);
     for(size_t i=0; i<650; i+=25)
     {
         left_coin.add_animation_frame(sf::IntRect(i+1, 0, 24, 25));
+        right_coin.add_animation_frame(sf::IntRect(i+1, 0, 24, 25));
     }
+    right_coin.is_show = false;
+    left_coin.is_show = true;
 }
 void GamePlay::ProcessInput()
 {
@@ -86,12 +90,49 @@ void GamePlay::Update(sf::Time deltaTime)
     m_bird.gravitation(m_elapsedTime);
     m_bird.rotation(m_elapsedTime);
 
+    if(right_coin.is_show)
+    {
+        left_coin.is_show = false;
+    }
+    if(left_coin.is_show)
+    {
+        right_coin.is_show = false;
+    }
+    if(right_coin.is_collect)
+    {
+        right_coin.is_show = false;
+        right_coin.is_collect = false;
+
+        left_coin.is_show = true;
+    }
+    if(left_coin.is_collect)
+    {
+        left_coin.is_show = false;
+        left_coin.is_collect = false;
+        right_coin.is_show = true;
+    }
+
+
     left_coin.step(m_elapsedTime);
+    right_coin.step(m_elapsedTime);
 
     sf::FloatRect bird_bounds = m_bird.getGlobalBounds();
     sf::FloatRect bird_hitbox = bird_bounds;
+    sf::FloatRect coinL_bounds = left_coin.getGlobalBounds();
+    sf::FloatRect coinR_bounds = right_coin.getGlobalBounds();
     bird_hitbox.width *= 1;
     bird_hitbox.height *= 0.4;
+
+    if ((bird_hitbox.intersects(coinL_bounds)) && (left_coin.is_show))
+    {
+        left_coin.is_collect = true;
+        right_coin.setPosition(530, right_coin.random_position());
+    }
+    if ((bird_hitbox.intersects(coinR_bounds)) && (right_coin.is_show))
+    {
+        right_coin.is_collect = true;
+        left_coin.setPosition(120, left_coin.random_position());
+    }
 
     numbers = m_bird.chosennumbers;
     for(size_t i=0; i<13; i++)
@@ -113,6 +154,8 @@ void GamePlay::Update(sf::Time deltaTime)
         {
             left_spikes[i].animation_left_hide(m_elapsedTime);
             right_spikes[i].animation_right_hide(m_elapsedTime);
+            left_coin.is_show = false;
+            right_coin.is_show = false;
         }
         else
         {
@@ -144,27 +187,28 @@ void GamePlay::Update(sf::Time deltaTime)
     m_scoreText.setOrigin(m_scoreText.getLocalBounds().width / 2, m_scoreText.getLocalBounds().height / 2);
     m_scoreText.setPosition(m_context->m_window->getSize().x / 2, 100);
 
-    if((m_score>=3) && (m_score<6))
+    int level_move = 5;
+    if((m_score>=level_move+1) && (m_score<(2*level_move+1)))
     {
         m_bird.currentLevel = 2;
     }
-    else if((m_score>=6) && (m_score<9))
+    else if((m_score>=(2*level_move+1)) && (m_score<(3*level_move+1)))
     {
         m_bird.currentLevel = 3;
     }
-    else if((m_score>=9) && (m_score<12))
+    else if((m_score>=(3*level_move+1)) && (m_score<(4*level_move+1)))
     {
         m_bird.currentLevel = 4;
     }
-    else if((m_score>=12) && (m_score<15))
+    else if((m_score>=(4*level_move+1)) && (m_score<(5*level_move+1)))
     {
         m_bird.currentLevel = 5;
     }
-    else if((m_score>=15) && (m_score<18))
+    else if((m_score>=(5*level_move+1)) && (m_score<(6*level_move+1)))
     {
         m_bird.currentLevel = 6;
     }
-    else if(m_score>=18)
+    else if(m_score>=(6*level_move+1))
     {
         m_bird.currentLevel = 7;
     }
@@ -222,10 +266,18 @@ void GamePlay::Draw()
     }
     m_context->m_window->draw(m_leftWall);
     m_context->m_window->draw(m_rightWall);
-    m_context->m_window->draw(left_coin);
+    if (left_coin.is_show)
+    {
+        m_context->m_window->draw(left_coin);
+    }
+    if (right_coin.is_show)
+    {
+        m_context->m_window->draw(right_coin);
+    }
     m_context->m_window->draw(m_bird);
     m_context->m_window->display();
 }
+
 void GamePlay::Pause()
 {
 }

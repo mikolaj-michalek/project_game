@@ -4,6 +4,8 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <memory>
+#include <chrono>
+#include <thread>
 #include "State.h"
 #include "game.h"
 #include "bird.h"
@@ -38,6 +40,8 @@ private:
     int m_score;
 
     std::vector<int> numbers;
+
+
 
 
 public:
