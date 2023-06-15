@@ -189,7 +189,7 @@ void GamePlay::Update(sf::Time deltaTime)
     m_scoreText.setOrigin(m_scoreText.getLocalBounds().width / 2, m_scoreText.getLocalBounds().height / 2);
     m_scoreText.setPosition(m_context->m_window->getSize().x / 2, 100);
 
-    int level_move = 5;
+    int level_move = 10;
     if((m_score>=level_move+1) && (m_score<(2*level_move+1)))
     {
         m_bird.currentLevel = 2;

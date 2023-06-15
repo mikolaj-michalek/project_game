@@ -78,12 +78,12 @@ void Bird::animation(const sf::Time elapsed, sf::Clock& realtimer)
     switch(this->currentLevel)
     {
     case 1:
-        this->howManySpikes = 3;
+        this->howManySpikes = 2;
         this->g_force *= 1;
         this->setScale(getScale().x, 1);
         break;
     case 2:
-        this->howManySpikes = 2;
+        this->howManySpikes = 1;
         if(this->g_force>0)
         {
            this->g_force *= -1;
@@ -91,7 +91,7 @@ void Bird::animation(const sf::Time elapsed, sf::Clock& realtimer)
         this->setScale(getScale().x, -1);
         break;
     case 3:
-        this->howManySpikes = 4;
+        this->howManySpikes = 3;
         if(this->g_force<0)
         {
            this->g_force *= -1;
@@ -99,7 +99,7 @@ void Bird::animation(const sf::Time elapsed, sf::Clock& realtimer)
         this->setScale(getScale().x, 1);
         break;
     case 4:
-        this->howManySpikes = 3;
+        this->howManySpikes = 2;
         if(this->g_force>0)
         {
            this->g_force *= -1;
@@ -107,7 +107,7 @@ void Bird::animation(const sf::Time elapsed, sf::Clock& realtimer)
         this->setScale(getScale().x, -1);
         break;
     case 5:
-        this->howManySpikes = 5;
+        this->howManySpikes = 4;
         if(this->g_force<0)
         {
            this->g_force *= -1;
@@ -115,7 +115,7 @@ void Bird::animation(const sf::Time elapsed, sf::Clock& realtimer)
         this->setScale(getScale().x, 1);
         break;
     case 6:
-        this->howManySpikes = 4;
+        this->howManySpikes = 3;
         if(this->g_force>0)
         {
            this->g_force *= -1;
@@ -123,7 +123,7 @@ void Bird::animation(const sf::Time elapsed, sf::Clock& realtimer)
         this->setScale(getScale().x, -1);
         break;
     case 7:
-        this->howManySpikes = 6;
+        this->howManySpikes = 5;
         if(this->g_force<0)
         {
            this->g_force *= -1;
@@ -131,7 +131,7 @@ void Bird::animation(const sf::Time elapsed, sf::Clock& realtimer)
         this->setScale(getScale().x, 1);
         break;
     default:
-        this->howManySpikes = 3;
+        this->howManySpikes = 2;
         this->g_force *= 1;
         this->setScale(getScale().x, 1);
         break;
