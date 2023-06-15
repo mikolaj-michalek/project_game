@@ -43,6 +43,7 @@ void Bird::InitGamePlay(const sf::Texture& texture)
     setPosition(325, 400);                                                                 //ustalenie pozycji
     setVelocity(220,0);
     setOrigin(this->getLocalBounds().width / 2, this->getLocalBounds().height / 2);
+    g_force = 750;
 }
 
 void Bird::InitMainMenu(const sf::Texture& texture)

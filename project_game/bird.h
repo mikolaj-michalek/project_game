@@ -15,7 +15,7 @@ private:
     float vel_x = 0.0;
     float vel_y = 0.0;
     float vel_r = 0.0;
-    float g_force = 750;
+    float g_force = 0;
     int lives = 1;
     int score = 0;
 
