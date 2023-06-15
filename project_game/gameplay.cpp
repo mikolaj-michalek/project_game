@@ -86,6 +86,9 @@ void GamePlay::Update(sf::Time deltaTime)
     m_bird.gravitation(m_elapsedTime);
     m_bird.rotation(m_elapsedTime);
     sf::FloatRect bird_bounds = m_bird.getGlobalBounds();
+    sf::FloatRect bird_hitbox = bird_bounds;
+    bird_hitbox.width *= 1;
+    bird_hitbox.height *= 0.1;
     m_score = m_bird.getScore();
     numbers = m_bird.chosennumbers;
     for(size_t i=0; i<13; i++)
@@ -93,13 +96,15 @@ void GamePlay::Update(sf::Time deltaTime)
         sf::FloatRect spikeL_bounds = left_spikes[i].getGlobalBounds();
         sf::FloatRect spikeR_bounds = right_spikes[i].getGlobalBounds();
 
-        if (bird_bounds.intersects(spikeL_bounds))
+        if (bird_hitbox.intersects(spikeL_bounds))
         {
             m_bird.isDead = true;
+            m_bird.change_look_die();
         }
-        if (bird_bounds.intersects(spikeR_bounds))
+        if (bird_hitbox.intersects(spikeR_bounds))
         {
             m_bird.isDead = true;
+            m_bird.change_look_die();
         }
 
         if(m_bird.isDead)
