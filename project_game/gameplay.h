@@ -1,13 +1,13 @@
 #ifndef GAMEPLAY_H
 #define GAMEPLAY_H
 
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Text.hpp>
+#include <memory>
 #include "State.h"
 #include "game.h"
 #include "bird.h"
 #include "spikes.h"
-#include <memory>
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/Text.hpp>
 #include "gameover.h"
 #include "mainmenu.h"
 #include "pausegame.h"
@@ -18,6 +18,7 @@ class GamePlay : public Engine::State
 private:
     std::shared_ptr<Context> m_context;
     bool isBackButtonPressed;
+
     sf::Sprite m_background;
     sf::Sprite m_leftWall;
     sf::Sprite m_rightWall;
@@ -25,7 +26,6 @@ private:
     Bird m_bird;
     sf::Time m_elapsedTime;
     sf::Clock timer;
-
     Spikes left_spikes[13];
     Spikes right_spikes[13] ;
 
@@ -46,7 +46,6 @@ public:
 
     void Pause() override;
     void Start() override;
-
 };
 
 #endif // GAMEPLAY_H

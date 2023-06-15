@@ -20,9 +20,7 @@ private:
     float vel_y = 0.0;
     float vel_r = 0.0;
     float g_force = 0;
-    int lives = 1;
     int score = 0;
-
 
 public:
     Bird();
@@ -44,18 +42,16 @@ public:
     void change_look_space();
     void change_look_die();
     void setStartPosition();
-    void setLives(int i);
-    void setScore(int i);
-    int getLives();
+    std::vector<int> losowanie(std::vector<int> numb, int m_amount);
     int getScore();
     bool isDead;
     bool TimeToEnd;
-    bool isTextureChanged;
     bool hitLeft;
     bool hitRight;
-
+    int currentLevel;
     std::vector<int> numbers;
     std::vector<int> chosennumbers;
+
 };
 
 #endif // BIRD_H

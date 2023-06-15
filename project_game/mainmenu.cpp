@@ -4,18 +4,22 @@
 MainMenu::MainMenu(std::shared_ptr<Context> &context)
     : m_context(context), isSpaceButtonPressed(false), isEscapeButtonPressed(false)
 {
-
 }
 
 MainMenu::~MainMenu()
 {
-
 }
 
 void MainMenu::Init()
 {
     m_context->m_assets->AddTexture(BACKGROUND, "assets/textures/background.png");
     m_context->m_assets->AddTexture(BIRDMENU, "assets/textures/bird_waiting.png");
+    m_context->m_assets->AddTexture(BACKGROUND2, "assets/textures/background_4.png");
+    m_context->m_assets->AddTexture(BACKGROUND3, "assets/textures/background_3.png");
+    m_context->m_assets->AddTexture(BACKGROUND4, "assets/textures/background_5.png");
+    m_context->m_assets->AddTexture(BACKGROUND5, "assets/textures/background_2.png");
+    m_context->m_assets->AddTexture(BACKGROUND6, "assets/textures/background_6.png");
+
     m_menuBackground.setTexture(m_context->m_assets->GetTexture(BACKGROUND));
 
     m_context->m_assets->AddFont(MAIN_FONT, "assets/fonts/pixel_font_7.ttf");
@@ -23,24 +27,21 @@ void MainMenu::Init()
     m_gameTitle.setString("SPIKY BIRD");
     m_gameTitle.setStyle(sf::Text::Bold);
     m_gameTitle.setCharacterSize(72);
-    m_gameTitle.setOrigin(m_gameTitle.getLocalBounds().width / 2,
-                          m_gameTitle.getLocalBounds().height / 2);
+    m_gameTitle.setOrigin(m_gameTitle.getLocalBounds().width / 2, m_gameTitle.getLocalBounds().height / 2);
     m_gameTitle.setPosition(m_context->m_window->getSize().x / 2, 100);
 
     m_gameInstruction_1.setFont(m_context->m_assets->GetFont(MAIN_FONT));
     m_gameInstruction_1.setString("TAP SPACE");
     m_gameInstruction_1.setStyle(sf::Text::Bold);
     m_gameInstruction_1.setCharacterSize(32);
-    m_gameInstruction_1.setOrigin(m_gameInstruction_1.getLocalBounds().width / 2,
-                                m_gameInstruction_1.getLocalBounds().height / 2);
+    m_gameInstruction_1.setOrigin(m_gameInstruction_1.getLocalBounds().width / 2, m_gameInstruction_1.getLocalBounds().height / 2);
     m_gameInstruction_1.setPosition(m_context->m_window->getSize().x / 2, 200);
 
     m_gameInstruction_2.setFont(m_context->m_assets->GetFont(MAIN_FONT));
     m_gameInstruction_2.setString("TO JUMP");
     m_gameInstruction_2.setStyle(sf::Text::Bold);
     m_gameInstruction_2.setCharacterSize(32);
-    m_gameInstruction_2.setOrigin(m_gameInstruction_2.getLocalBounds().width / 2,
-                                  m_gameInstruction_2.getLocalBounds().height / 2);
+    m_gameInstruction_2.setOrigin(m_gameInstruction_2.getLocalBounds().width / 2, m_gameInstruction_2.getLocalBounds().height / 2);
     m_gameInstruction_2.setPosition(m_context->m_window->getSize().x / 2, 225);
 
     m_gameInstruction_3.setFont(m_context->m_assets->GetFont(MAIN_FONT));
@@ -48,17 +49,14 @@ void MainMenu::Init()
     m_gameInstruction_3.setFillColor(sf::Color::White);
     m_gameInstruction_3.setStyle(sf::Text::Bold);
     m_gameInstruction_3.setCharacterSize(13);
-    m_gameInstruction_3.setOrigin(m_gameInstruction_3.getLocalBounds().width / 2,
-                                  m_gameInstruction_3.getLocalBounds().height / 2);
+    m_gameInstruction_3.setOrigin(m_gameInstruction_3.getLocalBounds().width / 2, m_gameInstruction_3.getLocalBounds().height / 2);
     m_gameInstruction_3.setPosition(m_context->m_window->getSize().x / 2, 255);
 
     menu_bird.InitMainMenu(m_context->m_assets->GetTexture(BIRDMENU));
-    menu_bird.add_animation_frame(sf::IntRect(0, 0, 84, 75));
-    menu_bird.add_animation_frame(sf::IntRect(131, 0, 84, 75));
-    menu_bird.add_animation_frame(sf::IntRect(262, 0, 84, 75));
-    menu_bird.add_animation_frame(sf::IntRect(393, 0, 84, 75));
-
-
+    for(size_t i=0; i<520; i+=131)
+    {
+        menu_bird.add_animation_frame(sf::IntRect(i, 0, 84, 75));
+    }
  }
 
 void MainMenu::ProcessInput()
@@ -88,8 +86,9 @@ void MainMenu::ProcessInput()
 void MainMenu::Update(sf::Time deltaTime)
 {
     m_elapsedTime += deltaTime;
+
     menu_bird.step(m_elapsedTime);
-    m_elapsedTime = sf::Time::Zero;
+
     if(isSpaceButtonPressed)
     {
         m_context->m_states->Add(std::make_unique<GamePlay>(m_context), true);
@@ -98,6 +97,8 @@ void MainMenu::Update(sf::Time deltaTime)
     {
         m_context->m_window->close();
     }
+
+    m_elapsedTime = sf::Time::Zero;
 }
 
 void MainMenu::Draw()

@@ -25,9 +25,7 @@ namespace Engine
         void PopCurrent();
         void ProcessStateChange();
         std::unique_ptr<State>& GetCurrent();
-
     };
-
-} // namespace Engine
+}
 
 #endif // STATEMANAGER_H

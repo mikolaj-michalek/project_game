@@ -1,15 +1,13 @@
 #ifndef MAINMENU_H
 #define MAINMENU_H
 
+#include <SFML/Graphics/Text.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 #include <memory>
 #include <vector>
 #include "bird.h"
-#include <SFML/Graphics/Text.hpp>
-#include <SFML/Graphics/Sprite.hpp>
-
 #include "State.h"
 #include "game.h"
-
 
 class MainMenu : public Engine::State
 {
@@ -20,6 +18,7 @@ private:
     sf::Text m_gameInstruction_2;
     sf::Text m_gameInstruction_3;
     sf::Sprite m_menuBackground;
+
     bool isSpaceButtonPressed;
     bool isEscapeButtonPressed;
 

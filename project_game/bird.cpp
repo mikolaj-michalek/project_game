@@ -5,7 +5,6 @@ Bird::Bird()
 {
     isDead = false;
     TimeToEnd = false;
-    isTextureChanged = false;
     hitLeft = false;
     hitRight = false;
 }
@@ -40,36 +39,38 @@ void Bird::step(const sf::Time elapsed)
 
 void Bird::InitGamePlay(const sf::Texture& texture)
 {
-    setTexture(texture);                                                                   //inicjalizacja tekstury
-    setTextureRect(sf::IntRect(0, 14, 107, 40));                                           //wyciecie poczatkowej tekstury
-    setPosition(325, 400);                                                                 //ustalenie pozycji
-    setVelocity(220,0);
-    setOrigin(this->getLocalBounds().width / 2, this->getLocalBounds().height / 2);
-    g_force = 750;
-    numbers.clear();
-    for (int i = 1; i < 13; ++i)
+    this->setTexture(texture);
+    this->setTextureRect(sf::IntRect(0, 14, 107, 40));
+    this->setPosition(325, 400);
+    this->setVelocity(220, -290);
+    this->setOrigin(this->getLocalBounds().width / 2, this->getLocalBounds().height / 2);
+    this->g_force = 750;
+    this->currentLevel = 1;
+
+    this->numbers.clear();
+    for (int i = 0; i < 13; ++i)
     {
-        numbers.push_back(i);
+        this->numbers.push_back(i);
     }
 }
 
 void Bird::InitMainMenu(const sf::Texture& texture)
 {
-    setTexture(texture);                                                                    //inicjalizacja tekstury
-    setTextureRect(sf::IntRect(0, 0, 84, 75));                                             //wycięcie poczatkowej tekstury
-    setPosition(325, 400);
-    setOrigin(this->getLocalBounds().width / 2, this->getLocalBounds().height / 2);
+    this->setTexture(texture);
+    this->setTextureRect(sf::IntRect(0, 0, 84, 75));
+    this->setPosition(325, 400);
+    this->setOrigin(this->getLocalBounds().width / 2, this->getLocalBounds().height / 2);
 }
 
 void Bird::setVelocity(float v_x, float v_y)
 {
-    vel_x = v_x;
-    vel_y = v_y;
+    this->vel_x = v_x;
+    this->vel_y = v_y;
 }
 
 void Bird::setRotation(float v_r)
 {
-    vel_r = v_r;
+    this->vel_r = v_r;
 }
 void Bird::animation(const sf::Time elapsed, sf::Clock& realtimer)
 {
@@ -95,7 +96,6 @@ void Bird::animation(const sf::Time elapsed, sf::Clock& realtimer)
             isSpacePressed = false;
         }
 
-        // Sprawdzenie czasu trwania zmiany tekstury
         if (isTextureChanged && realtimer.getElapsedTime() >= textureChangeDuration)
         {
             change_look_normal();
@@ -107,7 +107,7 @@ void Bird::animation(const sf::Time elapsed, sf::Clock& realtimer)
 
 void Bird::gravitation(const sf::Time elapsed)
 {
-    vel_y += g_force*elapsed.asSeconds();
+    this->vel_y += g_force*elapsed.asSeconds();
     move(vel_x*elapsed.asSeconds(), vel_y*elapsed.asSeconds());
 }
 
@@ -130,62 +130,57 @@ void Bird::collision(float win_x, float win_y)
     }
     if(bird_bounds.top <= 61)
     {
-        isDead = true;
         change_look_die();
-        setRotation(1000);
-        if(g_force < 10000)
+        if(g_force < 5000)
         {
-            g_force *= 1.08;
-            setVelocity(vel_x,vel_y);
+           g_force *= 1.09;
+           setVelocity(vel_x,-150);
         }
         else
         {
-            setVelocity(0,0);
             setStartPosition();
-            g_force = 0;
             setTextureRect(sf::IntRect(0, 0, 1, 1));
             TimeToEnd = true;
         }
-        vel_y = -(vel_y);
+        this->vel_y = -(vel_y);
     }
     if((bird_bounds.top+bird_bounds.height) >= (win_y-59))
-    {
-        isDead = true;
+    { 
         change_look_die();
-        setRotation(1000);
-        if(g_force < 6000)
+        if(g_force < 5000)
         {
            g_force *= 1.09;
            setVelocity(vel_x,150);
         }
         else
         {
-
-            setVelocity(0,0);
             setStartPosition();
-            g_force = 0;
             setTextureRect(sf::IntRect(0, 0, 1, 1));
             TimeToEnd = true;
         }
-        vel_y = -(vel_y);
-
+        this->vel_y = -(vel_y);
     }
+}
+
+std::vector<int> Bird::losowanie(std::vector<int> numb, int m_amount)
+{
+    this->chosennumbers.clear();
+    numb = this->numbers;
+    std::random_device rd;
+    std::mt19937 generator(rd());
+    std::shuffle(numb.begin(), numb.end(), generator);
+    chosennumbers.insert(chosennumbers.end(), numb.begin(), numb.begin() + m_amount);
+    numb.clear();
+    return chosennumbers;
 }
 
 void Bird::toLeft()
 {
-    hitRight = true;
-    hitLeft = false;
-    chosennumbers.clear();
-    std::vector<int> numbersCopy = numbers;
-    std::random_device rd;
-    std::mt19937 generator(rd());
-    std::shuffle(numbersCopy.begin(), numbersCopy.end(), generator);
-    chosennumbers.insert(chosennumbers.end(), numbersCopy.begin(), numbersCopy.begin() + 4);
-    numbersCopy.clear();
-
     vel_x = -(vel_x);
     setScale(-1,1);
+    hitRight = true;
+    hitLeft = false;
+    losowanie(numbers, 1);
     if(!isDead)
     {
         score++;
@@ -195,18 +190,11 @@ void Bird::toLeft()
 
 void Bird::toRight()
 {
-    hitRight = false;
-    hitLeft = true;
-    chosennumbers.clear();
-    std::vector<int> numbersCopy = numbers;
-    std::random_device rd;
-    std::mt19937 generator(rd());
-    std::shuffle(numbersCopy.begin(), numbersCopy.end(), generator);
-    chosennumbers.insert(chosennumbers.end(), numbersCopy.begin(), numbersCopy.begin() + 4);
-    numbersCopy.clear();
-
     vel_x = -(vel_x);
     setScale(1,1);
+    hitRight = false;
+    hitLeft = true;
+    losowanie(numbers, 1);
     if(!isDead)
     {
         score++;
@@ -218,45 +206,38 @@ void Bird::change_look_normal()
 {
     setTextureRect(sf::IntRect(0, 14, 107, 40));
     setOrigin(this->getLocalBounds().width / 2, this->getLocalBounds().height / 2);
+    isDead = false;
 }
 
 void Bird::change_look_space()
 {
     setTextureRect(sf::IntRect(115, 0, 107, 67));
     setOrigin(this->getLocalBounds().width / 2, this->getLocalBounds().height / 2);
+    isDead = false;
 }
 
 void Bird::change_look_die()
 {
     setTextureRect(sf::IntRect(231, 0, 86, 67));
     setOrigin(this->getLocalBounds().width / 2, this->getLocalBounds().height / 2);
+    isDead = true;
+    setRotation(1000);
 }
 
 void Bird::setStartPosition()
 {
-    setPosition(265, 363);
+    setPosition(325, 400);
     toRight();
-}
-
-void Bird::setLives(int i)
-{
-    lives = i;
-}
-
-void Bird::setScore(int i)
-{
-    score = i;
-}
-
-int Bird::getLives()
-{
-    return lives;
+    setVelocity(0,0);
+    this->g_force = 0;
 }
 
 int Bird::getScore()
 {
     return score;
 }
+
+
 
 
 

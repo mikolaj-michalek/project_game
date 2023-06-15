@@ -2,12 +2,10 @@
 
 Engine::AssetManager::AssetManager()
 {
-
 }
 
 Engine::AssetManager::~AssetManager()
 {
-
 }
 
 void Engine::AssetManager::AddTexture(int id, const std::string &filePath, bool wantRepeated)

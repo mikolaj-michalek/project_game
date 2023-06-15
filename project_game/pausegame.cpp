@@ -3,7 +3,6 @@
 PauseGame::PauseGame(std::shared_ptr<Context> &context)
     : m_context(context)
 {
-
 }
 
 PauseGame::~PauseGame()
@@ -13,12 +12,12 @@ PauseGame::~PauseGame()
 void PauseGame::Init()
 {
     m_pauseBackground.setTexture(m_context->m_assets->GetTexture(BACKGROUND));
+
     m_pauseTitle.setFont(m_context->m_assets->GetFont(MAIN_FONT));
     m_pauseTitle.setString("PAUSED");
     m_pauseTitle.setStyle(sf::Text::Bold);
     m_pauseTitle.setCharacterSize(72);
-    m_pauseTitle.setOrigin(m_pauseTitle.getLocalBounds().width / 2,
-                          m_pauseTitle.getLocalBounds().height / 2);
+    m_pauseTitle.setOrigin(m_pauseTitle.getLocalBounds().width / 2, m_pauseTitle.getLocalBounds().height / 2);
     m_pauseTitle.setPosition(m_context->m_window->getSize().x / 2, 300);
 }
 
@@ -36,7 +35,6 @@ void PauseGame::ProcessInput()
         {
             m_context->m_states->PopCurrent();
         }
-
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
         {
             m_context->m_window->close();

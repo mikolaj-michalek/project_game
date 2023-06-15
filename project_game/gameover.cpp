@@ -3,12 +3,10 @@
 GameOver::GameOver(std::shared_ptr<Context> &context, int birdScore)
     : m_context(context), isRetryButtonPressed(false), isCloseButtonPressed(false), m_score(birdScore)
 {
-
 }
 
 GameOver::~GameOver()
 {
-
 }
 
 void GameOver::Init()
@@ -20,24 +18,21 @@ void GameOver::Init()
     m_gameOverTitle.setString("GAME OVER");
     m_gameOverTitle.setStyle(sf::Text::Bold);
     m_gameOverTitle.setCharacterSize(72);
-    m_gameOverTitle.setOrigin(m_gameOverTitle.getLocalBounds().width / 2,
-                          m_gameOverTitle.getLocalBounds().height / 2);
+    m_gameOverTitle.setOrigin(m_gameOverTitle.getLocalBounds().width / 2, m_gameOverTitle.getLocalBounds().height / 2);
     m_gameOverTitle.setPosition(m_context->m_window->getSize().x / 2, 100);
 
     m_gameInstruction_1.setFont(m_context->m_assets->GetFont(MAIN_FONT));
     m_gameInstruction_1.setString("TAP SPACE");
     m_gameInstruction_1.setStyle(sf::Text::Bold);
     m_gameInstruction_1.setCharacterSize(32);
-    m_gameInstruction_1.setOrigin(m_gameInstruction_1.getLocalBounds().width / 2,
-                                m_gameInstruction_1.getLocalBounds().height / 2);
+    m_gameInstruction_1.setOrigin(m_gameInstruction_1.getLocalBounds().width / 2, m_gameInstruction_1.getLocalBounds().height / 2);
     m_gameInstruction_1.setPosition(m_context->m_window->getSize().x / 2, 200);
 
     m_gameInstruction_2.setFont(m_context->m_assets->GetFont(MAIN_FONT));
     m_gameInstruction_2.setString("TO RETRY");
     m_gameInstruction_2.setStyle(sf::Text::Bold);
     m_gameInstruction_2.setCharacterSize(32);
-    m_gameInstruction_2.setOrigin(m_gameInstruction_2.getLocalBounds().width / 2,
-                                  m_gameInstruction_2.getLocalBounds().height / 2);
+    m_gameInstruction_2.setOrigin(m_gameInstruction_2.getLocalBounds().width / 2, m_gameInstruction_2.getLocalBounds().height / 2);
     m_gameInstruction_2.setPosition(m_context->m_window->getSize().x / 2, 225);
 
     m_gameInstruction_3.setFont(m_context->m_assets->GetFont(MAIN_FONT));
@@ -45,8 +40,7 @@ void GameOver::Init()
     m_gameInstruction_3.setFillColor(sf::Color::White);
     m_gameInstruction_3.setStyle(sf::Text::Bold);
     m_gameInstruction_3.setCharacterSize(13);
-    m_gameInstruction_3.setOrigin(m_gameInstruction_3.getLocalBounds().width / 2,
-                                  m_gameInstruction_3.getLocalBounds().height / 2);
+    m_gameInstruction_3.setOrigin(m_gameInstruction_3.getLocalBounds().width / 2, m_gameInstruction_3.getLocalBounds().height / 2);
     m_gameInstruction_3.setPosition(m_context->m_window->getSize().x / 2, 255);
 
     finalScore.setFont(m_context->m_assets->GetFont(MAIN_FONT));
@@ -54,8 +48,7 @@ void GameOver::Init()
     finalScore.setFillColor(sf::Color::White);
     finalScore.setStyle(sf::Text::Bold);
     finalScore.setCharacterSize(50);
-    finalScore.setOrigin(finalScore.getLocalBounds().width / 2,
-                                  finalScore.getLocalBounds().height / 2);
+    finalScore.setOrigin(finalScore.getLocalBounds().width / 2, finalScore.getLocalBounds().height / 2);
     finalScore.setPosition(m_context->m_window->getSize().x / 2, 300);
  }
 

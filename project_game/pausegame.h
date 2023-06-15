@@ -4,7 +4,6 @@
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Sprite.hpp>
-
 #include "State.h"
 #include "game.h"
 

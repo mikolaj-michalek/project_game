@@ -8,7 +8,6 @@ Spikes::Spikes()
 
 Spikes::~Spikes()
 {
-
 }
 
 void Spikes::Init(const sf::Texture& texture, float m_x, float m_y)
@@ -20,8 +19,8 @@ void Spikes::Init(const sf::Texture& texture, float m_x, float m_y)
 
 void Spikes::setVelocity(float v_x, float v_y)
 {
-    vel_x = v_x;
-    vel_y = v_y;
+    this->vel_x = v_x;
+    this->vel_y = v_y;
 }
 
 void Spikes::animation_left_show(const sf::Time elapsed)
@@ -33,7 +32,6 @@ void Spikes::animation_left_show(const sf::Time elapsed)
             move(vel_x*elapsed.asSeconds(),0);
             isHide = false;
         }
-
     }
 }
 

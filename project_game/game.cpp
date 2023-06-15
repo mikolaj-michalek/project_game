@@ -9,7 +9,6 @@ Game::Game() : m_context(std::make_shared<Context>())
 
 Game::~Game()
 {
-
 }
 
 void Game::Run()
