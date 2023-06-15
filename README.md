@@ -21,10 +21,10 @@ You will find most of the control instructions on the game screen. Your most imp
 This game project is developed for educational purposes as part of my university studies. Therefore, contributions and collaboration are not currently open to external contributors.
 
 ## Sources
-Fonts:
+### Fonts
 1) https://fonts.google.com
    - pixel_font_7 (SIL Open Font License)
-Textures:
+### Textures
 1) https://pl.freepik.com
    - bird_gameplay.png (Freepik License)
    - bird_waiting.png (Freepik License)
@@ -39,7 +39,7 @@ Textures:
    - coin.png
    - lewa_sciana.png
    - prawa_sciana.png
-AssetManager & StateManager:
+### AssetManager & StateManager
 1) https://www.youtube.com/playlist?list=PLiZZKL9HLmWMF8PlzvZu2WOC9kjs1zzhm
 2) https://www.youtube.com/watch?v=BySDfVNljG8&list=PL6xSOsbVA1eb_QqMTTcql_3PdOiE928up
 
