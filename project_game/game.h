@@ -17,6 +17,7 @@ enum AssetID
     LEFT_SPIKE,
     RIGHT_SPIKE,
     BIRDGAME,
+    COIN,
     BIRDMENU,
     BACKGROUND2,
     BACKGROUND3,

@@ -14,6 +14,7 @@ void GamePlay::Init()
     m_context->m_assets->AddTexture(LEFT_WALL, "assets/textures/lewa_sciana.png");
     m_context->m_assets->AddTexture(RIGHT_WALL, "assets/textures/prawa_sciana.png");
     m_context->m_assets->AddTexture(BIRDGAME, "assets/textures/bird_gameplay_2.png");
+    m_context->m_assets->AddTexture(COIN, "assets/textures/coin.png");
     m_context->m_assets->AddTexture(LEFT_SPIKE, "assets/textures/kolec_lewy.png");
     m_context->m_assets->AddTexture(RIGHT_SPIKE, "assets/textures/kolec_prawy.png");
 
@@ -47,6 +48,12 @@ void GamePlay::Init()
     m_rightWall.setPosition(593,0);
 
     m_bird.InitGamePlay(m_context->m_assets->GetTexture(BIRDGAME));
+
+    left_coin.Init(m_context->m_assets->GetTexture(COIN), 150, 400);
+    for(size_t i=0; i<650; i+=25)
+    {
+        left_coin.add_animation_frame(sf::IntRect(i+1, 0, 24, 25));
+    }
 }
 void GamePlay::ProcessInput()
 {
@@ -78,6 +85,8 @@ void GamePlay::Update(sf::Time deltaTime)
     m_bird.collision(650, 800);
     m_bird.gravitation(m_elapsedTime);
     m_bird.rotation(m_elapsedTime);
+
+    left_coin.step(m_elapsedTime);
 
     sf::FloatRect bird_bounds = m_bird.getGlobalBounds();
     sf::FloatRect bird_hitbox = bird_bounds;
@@ -213,6 +222,7 @@ void GamePlay::Draw()
     }
     m_context->m_window->draw(m_leftWall);
     m_context->m_window->draw(m_rightWall);
+    m_context->m_window->draw(left_coin);
     m_context->m_window->draw(m_bird);
     m_context->m_window->display();
 }

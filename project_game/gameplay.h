@@ -8,6 +8,7 @@
 #include "game.h"
 #include "bird.h"
 #include "spikes.h"
+#include "coin.h"
 #include "gameover.h"
 #include "mainmenu.h"
 #include "pausegame.h"
@@ -27,13 +28,17 @@ private:
     sf::Time m_elapsedTime;
     sf::Clock timer;
     Spikes left_spikes[13];
-    Spikes right_spikes[13] ;
+    Spikes right_spikes[13];
+
+    Coin left_coin;
+    Coin right_coin;
 
     sf::Text m_scoreText;
     sf::Text m_pauseInfo;
     int m_score;
 
     std::vector<int> numbers;
+
 
 public:
     GamePlay(std::shared_ptr<Context> &context);

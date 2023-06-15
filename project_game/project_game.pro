@@ -8,6 +8,7 @@ INCLUDEPATH += "C:\SFML\SFML-2.5.1\include"
 SOURCES += \
         assetmanager.cpp \
         bird.cpp \
+        coin.cpp \
         game.cpp \
         gameover.cpp \
         gameplay.cpp \
@@ -28,6 +29,7 @@ HEADERS += \
     State.h \
     assetmanager.h \
     bird.h \
+    coin.h \
     game.h \
     gameover.h \
     gameplay.h \
