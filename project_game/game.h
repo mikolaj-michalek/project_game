@@ -11,6 +11,7 @@ enum AssetID
 {
     MAIN_FONT = 0,
     BACKGROUND,
+    BACKGROUND_GAMEOVER,
     LEFT_WALL,
     RIGHT_WALL,
     CANDY,

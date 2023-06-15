@@ -20,9 +20,9 @@ void GamePlay::Init()
 
     m_background.setTexture(m_context->m_assets->GetTexture(BACKGROUND));
     m_leftWall.setTexture(m_context->m_assets->GetTexture(LEFT_WALL));
-    m_leftWall.setPosition(0,0);
+    m_leftWall.setPosition(1,0);
     m_rightWall.setTexture(m_context->m_assets->GetTexture(RIGHT_WALL));
-    m_rightWall.setPosition(592,0);
+    m_rightWall.setPosition(593,0);
 
     m_bird.InitGamePlay(m_context->m_assets->GetTexture(BIRDGAME));
 }
@@ -54,14 +54,12 @@ void GamePlay::Update(sf::Time deltaTime)
     m_elapsedTime = sf::Time::Zero;
     if(m_bird.TimeToEnd)
     {
-        //go to game over
-        m_context->m_window->close();
+        m_context->m_states->Add(std::make_unique<GameOver>(m_context), true);
     }
 
     if(isBackButtonPressed)
     {
-        //back to menu(now closing window)
-        m_context->m_window->close();
+        m_context->m_states->Add(std::make_unique<MainMenu>(m_context), true);
     }
 }
 void GamePlay::Draw()

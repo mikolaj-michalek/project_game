@@ -6,6 +6,8 @@
 #include "bird.h"
 #include <memory>
 #include <SFML/Graphics/Sprite.hpp>
+#include "gameover.h"
+#include "mainmenu.h"
 
 class GamePlay : public Engine::State
 {

@@ -9,6 +9,7 @@ SOURCES += \
         assetmanager.cpp \
         bird.cpp \
         game.cpp \
+        gameover.cpp \
         gameplay.cpp \
         main.cpp \
         mainmenu.cpp \
@@ -26,6 +27,7 @@ HEADERS += \
     assetmanager.h \
     bird.h \
     game.h \
+    gameover.h \
     gameplay.h \
     mainmenu.h \
     statemanager.h
