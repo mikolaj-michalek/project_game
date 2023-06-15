@@ -46,7 +46,7 @@ void Bird::InitGamePlay(const sf::Texture& texture)
     this->setOrigin(this->getLocalBounds().width / 2, this->getLocalBounds().height / 2);
     this->g_force = 750;
     this->currentLevel = 1;
-    this->howManySpikes = 3;
+    this->howManySpikes = 2;
 
     this->numbers.clear();
     for (int i = 0; i < 13; ++i)
@@ -138,8 +138,6 @@ void Bird::animation(const sf::Time elapsed, sf::Clock& realtimer)
     }
     if(!isDead)
     {
-
-
         static bool isSpacePressed = false;
         static bool isTextureChanged = false;
         static sf::Time textureChangeDuration = sf::seconds(0.2f); // Czas trwania zmiany tekstury (0.1 sekundy w przykładzie)
@@ -347,78 +345,3 @@ int Bird::getScore()
 {
     return score;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

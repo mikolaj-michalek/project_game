@@ -44,16 +44,6 @@ void Coin::Init(const sf::Texture& texture, float m_x, float m_y)
     std::srand(std::time(NULL));
 }
 
-void Coin::show_coin()
-{
-
-}
-
-void Coin::hide_coin()
-{
-
-}
-
 int Coin::random_position()
 {
     std::random_device rd;

@@ -1,9 +1,9 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <memory>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window.hpp>
+#include <memory>
 #include "assetmanager.h"
 #include "statemanager.h"
 

@@ -42,9 +42,6 @@ private:
 
     std::vector<int> numbers;
 
-
-
-
 public:
     GamePlay(std::shared_ptr<Context> &context);
     ~GamePlay();

@@ -3,10 +3,10 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Text.hpp>
-#include "game.h"
 #include <vector>
 #include <algorithm>
 #include <random>
+#include "game.h"
 
 class Bird : public sf::Sprite
 {
@@ -43,15 +43,16 @@ public:
     void change_look_die();
     void setStartPosition();
     std::vector<int> losowanie(std::vector<int> numb, int m_amount);
-    int getScore();
+    std::vector<int> numbers;
+    std::vector<int> chosennumbers;
     bool isDead;
     bool TimeToEnd;
     bool hitLeft;
     bool hitRight;
+    int getScore();
+
     int currentLevel;
     int howManySpikes;
-    std::vector<int> numbers;
-    std::vector<int> chosennumbers;
 
 };
 

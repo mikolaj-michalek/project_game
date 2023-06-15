@@ -1,11 +1,12 @@
 #ifndef ASSETMANAGER_H
 #define ASSETMANAGER_H
 
+#include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/Font.hpp>
 #include <map>
 #include <memory>
 #include <string>
-#include <SFML/Graphics/Texture.hpp>
-#include <SFML/Graphics/Font.hpp>
+
 
 namespace Engine
 {

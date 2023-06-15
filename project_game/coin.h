@@ -2,9 +2,9 @@
 #define COIN_H
 
 #include <SFML/Graphics.hpp>
-#include "game.h"
 #include <vector>
 #include <random>
+#include "game.h"
 
 class Coin : public sf::Sprite
 {
@@ -15,7 +15,6 @@ private:
     float elapsed_accumulator = 0;
     float fps = 10.0;
 
-
 public:
     Coin();
     ~Coin();
@@ -23,8 +22,6 @@ public:
     void add_animation_frame(const sf::IntRect &frame);
     void step(const sf::Time elapsed);
     void Init(const sf::Texture& texture, float m_x, float m_y);
-    void show_coin();
-    void hide_coin();
     bool is_collect;
     bool is_show;
     int random_position();
