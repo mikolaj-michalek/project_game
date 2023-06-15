@@ -18,6 +18,11 @@ void GamePlay::Init()
     m_context->m_assets->AddTexture(BIRDGAME, "assets/textures/bird_gameplay_2.png");
     m_context->m_assets->AddTexture(LEFT_SPIKE, "assets/textures/kolec_lewy.png");
     m_context->m_assets->AddTexture(RIGHT_SPIKE, "assets/textures/kolec_prawy.png");
+//    m_context->m_assets->AddTexture(BACKGROUND2, "assets/textures/background_2.png");
+//    m_context->m_assets->AddTexture(BACKGROUND3, "assets/textures/background_3.png");
+//    m_context->m_assets->AddTexture(BACKGROUND4, "assets/textures/background_4.png");
+//    m_context->m_assets->AddTexture(BACKGROUND5, "assets/textures/background_5.png");
+//    m_context->m_assets->AddTexture(BACKGROUND6, "assets/textures/background_6.png");
 
     m_background.setTexture(m_context->m_assets->GetTexture(BACKGROUND));
     m_leftWall.setTexture(m_context->m_assets->GetTexture(LEFT_WALL));
