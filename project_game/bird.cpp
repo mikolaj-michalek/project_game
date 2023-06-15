@@ -41,7 +41,7 @@ void Bird::step(const sf::Time elapsed)
 void Bird::InitGamePlay(const sf::Texture& texture)
 {
     setTexture(texture);                                                                   //inicjalizacja tekstury
-    setTextureRect(sf::IntRect(0, 15, 121, 75));                                           //wyciecie poczatkowej tekstury
+    setTextureRect(sf::IntRect(0, 14, 107, 40));                                           //wyciecie poczatkowej tekstury
     setPosition(325, 400);                                                                 //ustalenie pozycji
     setVelocity(220,0);
     setOrigin(this->getLocalBounds().width / 2, this->getLocalBounds().height / 2);
@@ -56,7 +56,7 @@ void Bird::InitGamePlay(const sf::Texture& texture)
 void Bird::InitMainMenu(const sf::Texture& texture)
 {
     setTexture(texture);                                                                    //inicjalizacja tekstury
-    setTextureRect(sf::IntRect(0, 0, 84, 75));                                             //wyciêcie poczatkowej tekstury
+    setTextureRect(sf::IntRect(0, 0, 84, 75));                                             //wycięcie poczatkowej tekstury
     setPosition(325, 400);
     setOrigin(this->getLocalBounds().width / 2, this->getLocalBounds().height / 2);
 }
@@ -216,19 +216,19 @@ void Bird::toRight()
 
 void Bird::change_look_normal()
 {
-    setTextureRect(sf::IntRect(0, 15, 121, 75));
+    setTextureRect(sf::IntRect(0, 14, 107, 40));
     setOrigin(this->getLocalBounds().width / 2, this->getLocalBounds().height / 2);
 }
 
 void Bird::change_look_space()
 {
-    setTextureRect(sf::IntRect(130, 0, 121, 75));
+    setTextureRect(sf::IntRect(115, 0, 107, 67));
     setOrigin(this->getLocalBounds().width / 2, this->getLocalBounds().height / 2);
 }
 
 void Bird::change_look_die()
 {
-    setTextureRect(sf::IntRect(260, 0, 97, 75));
+    setTextureRect(sf::IntRect(231, 0, 86, 67));
     setOrigin(this->getLocalBounds().width / 2, this->getLocalBounds().height / 2);
 }
 

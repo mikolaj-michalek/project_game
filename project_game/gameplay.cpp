@@ -15,7 +15,7 @@ void GamePlay::Init()
 {
     m_context->m_assets->AddTexture(LEFT_WALL, "assets/textures/lewa_sciana.png");
     m_context->m_assets->AddTexture(RIGHT_WALL, "assets/textures/prawa_sciana.png");
-    m_context->m_assets->AddTexture(BIRDGAME, "assets/textures/bird_gameplay.png");
+    m_context->m_assets->AddTexture(BIRDGAME, "assets/textures/bird_gameplay_2.png");
     m_context->m_assets->AddTexture(LEFT_SPIKE, "assets/textures/kolec_lewy.png");
     m_context->m_assets->AddTexture(RIGHT_SPIKE, "assets/textures/kolec_prawy.png");
 
