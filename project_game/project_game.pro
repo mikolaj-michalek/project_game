@@ -14,6 +14,7 @@ SOURCES += \
         main.cpp \
         mainmenu.cpp \
         pausegame.cpp \
+        spikes.cpp \
         statemanager.cpp
 
 LIBS += -L"C:\SFML\SFML-2.5.1\lib"
@@ -32,4 +33,5 @@ HEADERS += \
     gameplay.h \
     mainmenu.h \
     pausegame.h \
+    spikes.h \
     statemanager.h

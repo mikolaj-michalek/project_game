@@ -4,12 +4,14 @@
 #include "State.h"
 #include "game.h"
 #include "bird.h"
+#include "spikes.h"
 #include <memory>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include "gameover.h"
 #include "mainmenu.h"
 #include "pausegame.h"
+
 
 class GamePlay : public Engine::State
 {
@@ -24,9 +26,14 @@ private:
     sf::Time m_elapsedTime;
     sf::Clock timer;
 
+    Spikes left_spikes[13];
+    Spikes right_spikes[13] ;
+
     sf::Text m_scoreText;
     sf::Text m_pauseInfo;
     int m_score;
+
+    std::vector<int> numbers;
 
 public:
     GamePlay(std::shared_ptr<Context> &context);

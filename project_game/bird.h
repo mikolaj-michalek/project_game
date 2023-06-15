@@ -4,6 +4,9 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include "game.h"
+#include <vector>
+#include <algorithm>
+#include <random>
 
 class Bird : public sf::Sprite
 {
@@ -19,6 +22,7 @@ private:
     float g_force = 0;
     int lives = 1;
     int score = 0;
+
 
 public:
     Bird();
@@ -47,6 +51,11 @@ public:
     bool isDead;
     bool TimeToEnd;
     bool isTextureChanged;
+    bool hitLeft;
+    bool hitRight;
+
+    std::vector<int> numbers;
+    std::vector<int> chosennumbers;
 };
 
 #endif // BIRD_H

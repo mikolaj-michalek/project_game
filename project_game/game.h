@@ -14,7 +14,8 @@ enum AssetID
     BACKGROUND_GAMEOVER,
     LEFT_WALL,
     RIGHT_WALL,
-    CANDY,
+    LEFT_SPIKE,
+    RIGHT_SPIKE,
     BIRDGAME,
     BIRDMENU
 };

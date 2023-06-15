@@ -6,6 +6,8 @@ Bird::Bird()
     isDead = false;
     TimeToEnd = false;
     isTextureChanged = false;
+    hitLeft = false;
+    hitRight = false;
 }
 
 Bird::~Bird()
@@ -44,6 +46,11 @@ void Bird::InitGamePlay(const sf::Texture& texture)
     setVelocity(220,0);
     setOrigin(this->getLocalBounds().width / 2, this->getLocalBounds().height / 2);
     g_force = 750;
+    numbers.clear();
+    for (int i = 1; i < 13; ++i)
+    {
+        numbers.push_back(i);
+    }
 }
 
 void Bird::InitMainMenu(const sf::Texture& texture)
@@ -167,6 +174,16 @@ void Bird::collision(float win_x, float win_y)
 
 void Bird::toLeft()
 {
+    hitRight = true;
+    hitLeft = false;
+    chosennumbers.clear();
+    std::vector<int> numbersCopy = numbers;
+    std::random_device rd;
+    std::mt19937 generator(rd());
+    std::shuffle(numbersCopy.begin(), numbersCopy.end(), generator);
+    chosennumbers.insert(chosennumbers.end(), numbersCopy.begin(), numbersCopy.begin() + 4);
+    numbersCopy.clear();
+
     vel_x = -(vel_x);
     setScale(-1,1);
     if(!isDead)
@@ -178,6 +195,16 @@ void Bird::toLeft()
 
 void Bird::toRight()
 {
+    hitRight = false;
+    hitLeft = true;
+    chosennumbers.clear();
+    std::vector<int> numbersCopy = numbers;
+    std::random_device rd;
+    std::mt19937 generator(rd());
+    std::shuffle(numbersCopy.begin(), numbersCopy.end(), generator);
+    chosennumbers.insert(chosennumbers.end(), numbersCopy.begin(), numbersCopy.begin() + 4);
+    numbersCopy.clear();
+
     vel_x = -(vel_x);
     setScale(1,1);
     if(!isDead)

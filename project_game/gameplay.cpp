@@ -16,6 +16,8 @@ void GamePlay::Init()
     m_context->m_assets->AddTexture(LEFT_WALL, "assets/textures/lewa_sciana.png");
     m_context->m_assets->AddTexture(RIGHT_WALL, "assets/textures/prawa_sciana.png");
     m_context->m_assets->AddTexture(BIRDGAME, "assets/textures/bird_gameplay.png");
+    m_context->m_assets->AddTexture(LEFT_SPIKE, "assets/textures/kolec_lewy.png");
+    m_context->m_assets->AddTexture(RIGHT_SPIKE, "assets/textures/kolec_prawy.png");
 
     m_background.setTexture(m_context->m_assets->GetTexture(BACKGROUND));
     m_leftWall.setTexture(m_context->m_assets->GetTexture(LEFT_WALL));
@@ -40,6 +42,18 @@ void GamePlay::Init()
     m_pauseInfo.setOrigin(m_pauseInfo.getLocalBounds().width / 2,
                           m_pauseInfo.getLocalBounds().height / 2);
     m_pauseInfo.setPosition(m_context->m_window->getSize().x / 2, 785);
+    for(size_t i=0; i<13; i++)
+    {
+        left_spikes[i].Init(m_context->m_assets->GetTexture(LEFT_SPIKE), 12, (i*49+82));
+        right_spikes[i].Init(m_context->m_assets->GetTexture(RIGHT_SPIKE), 593, (i*49+82));
+        left_spikes[i].setVelocity(100,0);
+        right_spikes[i].setVelocity(100,0);
+    }
+    for (int i = 1; i <= 13; ++i)
+    {
+        numbers.push_back(i);
+    }
+
 }
 void GamePlay::ProcessInput()
 {
@@ -71,8 +85,55 @@ void GamePlay::Update(sf::Time deltaTime)
     m_bird.collision(650, 800);
     m_bird.gravitation(m_elapsedTime);
     m_bird.rotation(m_elapsedTime);
-    m_elapsedTime = sf::Time::Zero;
+    sf::FloatRect bird_bounds = m_bird.getGlobalBounds();
     m_score = m_bird.getScore();
+    numbers = m_bird.chosennumbers;
+    for(size_t i=0; i<13; i++)
+    {
+        sf::FloatRect spikeL_bounds = left_spikes[i].getGlobalBounds();
+        sf::FloatRect spikeR_bounds = right_spikes[i].getGlobalBounds();
+
+        if (bird_bounds.intersects(spikeL_bounds))
+        {
+            m_bird.isDead = true;
+        }
+        if (bird_bounds.intersects(spikeR_bounds))
+        {
+            m_bird.isDead = true;
+        }
+
+        if(m_bird.isDead)
+        {
+            left_spikes[i].animation_left_hide(m_elapsedTime);
+            right_spikes[i].animation_right_hide(m_elapsedTime);
+        }
+        else
+        {
+            if(m_bird.hitLeft)
+            {
+                left_spikes[i].animation_left_hide(m_elapsedTime);
+                for (int number : numbers)
+                {
+                    right_spikes[number].gonna_show = true;
+                }
+                right_spikes[i].animation_right_show(m_elapsedTime);
+                left_spikes[i].gonna_show = false;
+            }
+            if(m_bird.hitRight)
+            {
+                right_spikes[i].animation_right_hide(m_elapsedTime);
+                for (int number : numbers)
+                {
+                    left_spikes[number].gonna_show = true;
+                }
+                left_spikes[i].animation_left_show(m_elapsedTime);
+                right_spikes[i].gonna_show = false;
+            }
+        }
+    }
+    numbers.clear();
+    m_bird.chosennumbers.clear();
+    m_elapsedTime = sf::Time::Zero;
     m_scoreText.setString(std::to_string(m_score));
     m_scoreText.setOrigin(m_scoreText.getLocalBounds().width / 2,
                           m_scoreText.getLocalBounds().height / 2);
@@ -91,6 +152,11 @@ void GamePlay::Draw()
 {
     m_context->m_window->clear(sf::Color::Black);
     m_context->m_window->draw(m_background);
+    for(size_t i=0; i<13; i++)
+    {
+        m_context->m_window->draw(left_spikes[i]);
+        m_context->m_window->draw(right_spikes[i]);
+    }
     m_context->m_window->draw(m_leftWall);
     m_context->m_window->draw(m_rightWall);
     m_context->m_window->draw(m_scoreText);
