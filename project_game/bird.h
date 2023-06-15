@@ -2,7 +2,9 @@
 #define BIRD_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Text.hpp>
 #include "game.h"
+#include "mainmenu.h"
 
 class Bird : public sf::Sprite
 {

@@ -13,6 +13,7 @@ SOURCES += \
         gameplay.cpp \
         main.cpp \
         mainmenu.cpp \
+        pausegame.cpp \
         statemanager.cpp
 
 LIBS += -L"C:\SFML\SFML-2.5.1\lib"
@@ -30,4 +31,5 @@ HEADERS += \
     gameover.h \
     gameplay.h \
     mainmenu.h \
+    pausegame.h \
     statemanager.h

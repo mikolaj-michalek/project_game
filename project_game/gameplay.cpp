@@ -1,7 +1,7 @@
 #include "gameplay.h"
 
 GamePlay::GamePlay(std::shared_ptr<Context> &context)
-    : m_context(context), isBackButtonPressed(false), m_elapsedTime(sf::Time::Zero)
+    : m_context(context), isBackButtonPressed(false), m_elapsedTime(sf::Time::Zero), m_score(0)
 {
 
 }
@@ -13,7 +13,6 @@ GamePlay::~GamePlay()
 
 void GamePlay::Init()
 {
-    m_context->m_assets->AddTexture(BACKGROUND, "assets/textures/background.png");
     m_context->m_assets->AddTexture(LEFT_WALL, "assets/textures/lewa_sciana.png");
     m_context->m_assets->AddTexture(RIGHT_WALL, "assets/textures/prawa_sciana.png");
     m_context->m_assets->AddTexture(BIRDGAME, "assets/textures/bird_gameplay.png");
@@ -25,6 +24,22 @@ void GamePlay::Init()
     m_rightWall.setPosition(593,0);
 
     m_bird.InitGamePlay(m_context->m_assets->GetTexture(BIRDGAME));
+
+    m_scoreText.setFont(m_context->m_assets->GetFont(MAIN_FONT));
+    m_scoreText.setString("0");
+    m_scoreText.setStyle(sf::Text::Bold);
+    m_scoreText.setCharacterSize(108);
+    m_scoreText.setOrigin(m_scoreText.getLocalBounds().width / 2,
+                          m_scoreText.getLocalBounds().height / 2);
+    m_scoreText.setPosition(m_context->m_window->getSize().x / 2, 100);
+
+    m_pauseInfo.setFont(m_context->m_assets->GetFont(MAIN_FONT));
+    m_pauseInfo.setString("TAP P TO PAUSE       TAP ESC TO MENU");
+    m_pauseInfo.setStyle(sf::Text::Bold);
+    m_pauseInfo.setCharacterSize(16);
+    m_pauseInfo.setOrigin(m_pauseInfo.getLocalBounds().width / 2,
+                          m_pauseInfo.getLocalBounds().height / 2);
+    m_pauseInfo.setPosition(m_context->m_window->getSize().x / 2, 785);
 }
 void GamePlay::ProcessInput()
 {
@@ -42,6 +57,11 @@ void GamePlay::ProcessInput()
         {
             isBackButtonPressed = true;
         }
+
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::P))
+        {
+            m_context->m_states->Add(std::make_unique<PauseGame>(m_context));
+        }
     }
 }
 void GamePlay::Update(sf::Time deltaTime)
@@ -52,9 +72,14 @@ void GamePlay::Update(sf::Time deltaTime)
     m_bird.gravitation(m_elapsedTime);
     m_bird.rotation(m_elapsedTime);
     m_elapsedTime = sf::Time::Zero;
+    m_score = m_bird.getScore();
+    m_scoreText.setString(std::to_string(m_score));
+    m_scoreText.setOrigin(m_scoreText.getLocalBounds().width / 2,
+                          m_scoreText.getLocalBounds().height / 2);
+    m_scoreText.setPosition(m_context->m_window->getSize().x / 2, 100);
     if(m_bird.TimeToEnd)
     {
-        m_context->m_states->Add(std::make_unique<GameOver>(m_context), true);
+        m_context->m_states->Add(std::make_unique<GameOver>(m_context, m_score), true);
     }
 
     if(isBackButtonPressed)
@@ -68,6 +93,8 @@ void GamePlay::Draw()
     m_context->m_window->draw(m_background);
     m_context->m_window->draw(m_leftWall);
     m_context->m_window->draw(m_rightWall);
+    m_context->m_window->draw(m_scoreText);
+    m_context->m_window->draw(m_pauseInfo);
     m_context->m_window->draw(m_bird);
     m_context->m_window->display();
 }

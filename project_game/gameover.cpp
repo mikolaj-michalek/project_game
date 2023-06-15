@@ -1,8 +1,7 @@
 #include "gameover.h"
-#include "gameplay.h"
 
-GameOver::GameOver(std::shared_ptr<Context> &context)
-    : m_context(context), isRetryButtonPressed(false), isCloseButtonPressed(false)
+GameOver::GameOver(std::shared_ptr<Context> &context, int birdScore)
+    : m_context(context), isRetryButtonPressed(false), isCloseButtonPressed(false), m_score(birdScore)
 {
 
 }
@@ -14,17 +13,16 @@ GameOver::~GameOver()
 
 void GameOver::Init()
 {
-    m_context->m_assets->AddTexture(BACKGROUND_GAMEOVER, "assets/textures/background.png");
+    m_context->m_assets->AddTexture(BACKGROUND_GAMEOVER, "assets/textures/background_gameover.png");
     m_gameOverBackground.setTexture(m_context->m_assets->GetTexture(BACKGROUND_GAMEOVER));
 
-    m_context->m_assets->AddFont(MAIN_FONT, "assets/fonts/pixel_font_7.ttf");
     m_gameOverTitle.setFont(m_context->m_assets->GetFont(MAIN_FONT));
     m_gameOverTitle.setString("GAME OVER");
     m_gameOverTitle.setStyle(sf::Text::Bold);
     m_gameOverTitle.setCharacterSize(72);
     m_gameOverTitle.setOrigin(m_gameOverTitle.getLocalBounds().width / 2,
                           m_gameOverTitle.getLocalBounds().height / 2);
-    m_gameOverTitle.setPosition(m_context->m_window->getSize().x / 2, 300);
+    m_gameOverTitle.setPosition(m_context->m_window->getSize().x / 2, 100);
 
     m_gameInstruction_1.setFont(m_context->m_assets->GetFont(MAIN_FONT));
     m_gameInstruction_1.setString("TAP SPACE");
@@ -50,6 +48,15 @@ void GameOver::Init()
     m_gameInstruction_3.setOrigin(m_gameInstruction_3.getLocalBounds().width / 2,
                                   m_gameInstruction_3.getLocalBounds().height / 2);
     m_gameInstruction_3.setPosition(m_context->m_window->getSize().x / 2, 255);
+
+    finalScore.setFont(m_context->m_assets->GetFont(MAIN_FONT));
+    finalScore.setString("FINAL SCORE: " + std::to_string(m_score));
+    finalScore.setFillColor(sf::Color::White);
+    finalScore.setStyle(sf::Text::Bold);
+    finalScore.setCharacterSize(50);
+    finalScore.setOrigin(finalScore.getLocalBounds().width / 2,
+                                  finalScore.getLocalBounds().height / 2);
+    finalScore.setPosition(m_context->m_window->getSize().x / 2, 300);
  }
 
 void GameOver::ProcessInput()
@@ -96,5 +103,6 @@ void GameOver::Draw()
     m_context->m_window->draw(m_gameInstruction_1);
     m_context->m_window->draw(m_gameInstruction_2);
     m_context->m_window->draw(m_gameInstruction_3);
+    m_context->m_window->draw(finalScore);
     m_context->m_window->display();
 }

@@ -6,8 +6,10 @@
 #include "bird.h"
 #include <memory>
 #include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Text.hpp>
 #include "gameover.h"
 #include "mainmenu.h"
+#include "pausegame.h"
 
 class GamePlay : public Engine::State
 {
@@ -22,6 +24,9 @@ private:
     sf::Time m_elapsedTime;
     sf::Clock timer;
 
+    sf::Text m_scoreText;
+    sf::Text m_pauseInfo;
+    int m_score;
 
 public:
     GamePlay(std::shared_ptr<Context> &context);

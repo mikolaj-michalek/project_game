@@ -10,6 +10,7 @@
 #include "State.h"
 #include "game.h"
 #include "mainmenu.h"
+#include "gameplay.h"
 
 class GameOver : public Engine::State
 {
@@ -19,12 +20,15 @@ private:
     sf::Text m_gameInstruction_1;
     sf::Text m_gameInstruction_2;
     sf::Text m_gameInstruction_3;
+    sf::Text finalScore;
     sf::Sprite m_gameOverBackground;
     bool isRetryButtonPressed;
     bool isCloseButtonPressed;
 
+    int m_score;
+
 public:
-    GameOver(std::shared_ptr<Context> &context);
+    GameOver(std::shared_ptr<Context> &context, int birdScore);
     ~GameOver();
 
     void Init() override;
