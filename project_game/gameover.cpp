@@ -1,7 +1,7 @@
 #include "gameover.h"
 
-GameOver::GameOver(std::shared_ptr<Context> &context, int birdScore)
-    : m_context(context), isRetryButtonPressed(false), isCloseButtonPressed(false), m_score(birdScore)
+GameOver::GameOver(std::shared_ptr<Context> &context, int birdScore, int coinsCollected)
+    : m_context(context), isRetryButtonPressed(false), isCloseButtonPressed(false), m_score(birdScore), m_coins(coinsCollected)
 {
 }
 
@@ -50,6 +50,20 @@ void GameOver::Init()
     finalScore.setCharacterSize(50);
     finalScore.setOrigin(finalScore.getLocalBounds().width / 2, finalScore.getLocalBounds().height / 2);
     finalScore.setPosition(m_context->m_window->getSize().x / 2, 300);
+
+    finalCoins.setFont(m_context->m_assets->GetFont(MAIN_FONT));
+    finalCoins.setString(std::to_string(m_coins));
+    finalCoins.setFillColor(sf::Color::White);
+    finalCoins.setStyle(sf::Text::Bold);
+    finalCoins.setCharacterSize(34);
+    finalCoins.setOrigin(finalCoins.getLocalBounds().width / 2, finalCoins.getLocalBounds().height / 2);
+    finalCoins.setPosition(302, 350);
+
+    resultCoin.Init(m_context->m_assets->GetTexture(COIN), 343, 363);
+    for(size_t i=0; i<650; i+=25)
+    {
+        resultCoin.add_animation_frame(sf::IntRect(i+1, 0, 24, 25));
+    }
  }
 
 void GameOver::ProcessInput()
@@ -78,6 +92,8 @@ void GameOver::ProcessInput()
 
 void GameOver::Update(sf::Time deltaTime)
 {
+    m_elapsedTime += deltaTime;
+    resultCoin.step(m_elapsedTime);
     if(isRetryButtonPressed)
     {
         m_context->m_states->Add(std::make_unique<MainMenu>(m_context), true);
@@ -86,6 +102,7 @@ void GameOver::Update(sf::Time deltaTime)
     {
         m_context->m_window->close();
     }
+    m_elapsedTime = sf::Time::Zero;
 }
 
 void GameOver::Draw()
@@ -97,5 +114,7 @@ void GameOver::Draw()
     m_context->m_window->draw(m_gameInstruction_2);
     m_context->m_window->draw(m_gameInstruction_3);
     m_context->m_window->draw(finalScore);
+    m_context->m_window->draw(finalCoins);
+    m_context->m_window->draw(resultCoin);
     m_context->m_window->display();
 }

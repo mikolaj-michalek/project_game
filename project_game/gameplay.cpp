@@ -1,7 +1,7 @@
 #include "gameplay.h"
 
 GamePlay::GamePlay(std::shared_ptr<Context> &context)
-    : m_context(context), isBackButtonPressed(false), m_elapsedTime(sf::Time::Zero), m_score(0)
+    : m_context(context), isBackButtonPressed(false), m_elapsedTime(sf::Time::Zero), m_score(0), m_coins(0)
 {
 }
 
@@ -100,6 +100,7 @@ void GamePlay::Update(sf::Time deltaTime)
     }
     if(right_coin.is_collect)
     {
+        m_coins++;
         right_coin.is_show = false;
         right_coin.is_collect = false;
 
@@ -107,6 +108,7 @@ void GamePlay::Update(sf::Time deltaTime)
     }
     if(left_coin.is_collect)
     {
+        m_coins++;
         left_coin.is_show = false;
         left_coin.is_collect = false;
         right_coin.is_show = true;
@@ -243,7 +245,7 @@ void GamePlay::Update(sf::Time deltaTime)
 
     if(m_bird.TimeToEnd)
     {
-        m_context->m_states->Add(std::make_unique<GameOver>(m_context, m_score), true);
+        m_context->m_states->Add(std::make_unique<GameOver>(m_context, m_score, m_coins), true);
     }
     if(isBackButtonPressed)
     {

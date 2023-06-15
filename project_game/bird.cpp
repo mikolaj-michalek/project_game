@@ -46,6 +46,7 @@ void Bird::InitGamePlay(const sf::Texture& texture)
     this->setOrigin(this->getLocalBounds().width / 2, this->getLocalBounds().height / 2);
     this->g_force = 750;
     this->currentLevel = 1;
+    this->howManySpikes = 3;
 
     this->numbers.clear();
     for (int i = 0; i < 13; ++i)
@@ -77,10 +78,12 @@ void Bird::animation(const sf::Time elapsed, sf::Clock& realtimer)
     switch(this->currentLevel)
     {
     case 1:
+        this->howManySpikes = 3;
         this->g_force *= 1;
         this->setScale(getScale().x, 1);
         break;
     case 2:
+        this->howManySpikes = 2;
         if(this->g_force>0)
         {
            this->g_force *= -1;
@@ -88,6 +91,7 @@ void Bird::animation(const sf::Time elapsed, sf::Clock& realtimer)
         this->setScale(getScale().x, -1);
         break;
     case 3:
+        this->howManySpikes = 4;
         if(this->g_force<0)
         {
            this->g_force *= -1;
@@ -95,6 +99,7 @@ void Bird::animation(const sf::Time elapsed, sf::Clock& realtimer)
         this->setScale(getScale().x, 1);
         break;
     case 4:
+        this->howManySpikes = 3;
         if(this->g_force>0)
         {
            this->g_force *= -1;
@@ -102,6 +107,7 @@ void Bird::animation(const sf::Time elapsed, sf::Clock& realtimer)
         this->setScale(getScale().x, -1);
         break;
     case 5:
+        this->howManySpikes = 5;
         if(this->g_force<0)
         {
            this->g_force *= -1;
@@ -109,6 +115,7 @@ void Bird::animation(const sf::Time elapsed, sf::Clock& realtimer)
         this->setScale(getScale().x, 1);
         break;
     case 6:
+        this->howManySpikes = 4;
         if(this->g_force>0)
         {
            this->g_force *= -1;
@@ -116,6 +123,7 @@ void Bird::animation(const sf::Time elapsed, sf::Clock& realtimer)
         this->setScale(getScale().x, -1);
         break;
     case 7:
+        this->howManySpikes = 6;
         if(this->g_force<0)
         {
            this->g_force *= -1;
@@ -123,6 +131,7 @@ void Bird::animation(const sf::Time elapsed, sf::Clock& realtimer)
         this->setScale(getScale().x, 1);
         break;
     default:
+        this->howManySpikes = 3;
         this->g_force *= 1;
         this->setScale(getScale().x, 1);
         break;
@@ -284,11 +293,10 @@ void Bird::toLeft()
     setScale(-1,getScale().y);
     hitRight = true;
     hitLeft = false;
-    losowanie(numbers, 1);
+    losowanie(numbers, howManySpikes);
     if(!isDead)
     {
         score++;
-        std::cout << "Score: " << score << std::endl;
     }
 }
 
@@ -298,11 +306,10 @@ void Bird::toRight()
     setScale(1,getScale().y);
     hitRight = false;
     hitLeft = true;
-    losowanie(numbers, 1);
+    losowanie(numbers, howManySpikes);
     if(!isDead)
     {
         score++;
-        std::cout << "Score: " << score << std::endl;
     }
 }
 

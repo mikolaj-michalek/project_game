@@ -49,6 +49,7 @@ public:
     bool hitLeft;
     bool hitRight;
     int currentLevel;
+    int howManySpikes;
     std::vector<int> numbers;
     std::vector<int> chosennumbers;
 

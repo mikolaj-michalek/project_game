@@ -4,8 +4,8 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <memory>
-#include <chrono>
-#include <thread>
+#include <iostream>
+#include <cstdlib>
 #include "State.h"
 #include "game.h"
 #include "bird.h"
@@ -38,6 +38,7 @@ private:
     sf::Text m_scoreText;
     sf::Text m_pauseInfo;
     int m_score;
+    int m_coins;
 
     std::vector<int> numbers;
 
